@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "RKdatafactory50000714"
+		},
+		"AzureDataLakeStorage_accountKey": {
+			"value": ""
+		},
+		"AzureSynapseAnalyticsActivitypoolLog_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage_properties_typeProperties_url": {
+			"value": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"AzureSynapseAnalyticsActivitypoolLog_properties_typeProperties_server": {
+			"value": "dataworkspace400007.sql.azuresynapse.net"
+		},
+		"AzureSynapseAnalyticsActivitypoolLog_properties_typeProperties_database": {
+			"value": "datapool"
+		},
+		"AzureSynapseAnalyticsActivitypoolLog_properties_typeProperties_userName": {
+			"value": "sqladminuser"
+		}
+	}
+}
