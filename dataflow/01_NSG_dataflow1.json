@@ -39,7 +39,7 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'arrayOfDocuments') ~> sourceNSGFlow",
+				"     documentForm: 'documentPerLine') ~> sourceNSGFlow",
 				"sourceNSGFlow foldDown(unrollMultiple(records,records.properties.flows.flows.flowTuples),",
 				"     mapColumn(",
 				"          records = records,",
