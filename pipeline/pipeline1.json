@@ -114,7 +114,16 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableLogging": false
+					"dataset": {
+						"referenceName": "nsgtemporaryfile",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
 				}
 			}
 		],
