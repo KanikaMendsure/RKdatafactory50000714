@@ -15,6 +15,26 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSynapseAnalyticsActivitypoolLog'"
 		},
+		"datalake4005007_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'datalake4005007'"
+		},
+		"nsgdataflow40005007_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'nsgdataflow40005007'"
+		},
+		"nsgdataflow_40005007_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'nsgdataflow_40005007'"
+		},
+		"synapseflowtuples_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'synapseflowtuples'"
+		},
+		"Stagingfoldernsg_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Stagingfoldernsg'"
+		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
@@ -30,6 +50,22 @@
 		"AzureSynapseAnalyticsActivitypoolLog_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "sqladminuser"
+		},
+		"datalake4005007_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"nsgdataflow40005007_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"nsgdataflow_40005007_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"Stagingfoldernsg_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -70,6 +106,87 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('AzureSynapseAnalyticsActivitypoolLog_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/datalake4005007')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('datalake4005007_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('datalake4005007_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/nsgdataflow40005007')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('nsgdataflow40005007_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('nsgdataflow40005007_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/nsgdataflow_40005007')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('nsgdataflow_40005007_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('nsgdataflow_40005007_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapseflowtuples')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDW",
+				"typeProperties": {
+					"connectionString": "[parameters('synapseflowtuples_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Stagingfoldernsg')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('Stagingfoldernsg_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('Stagingfoldernsg_accountKey')]"
 					}
 				}
 			},
@@ -213,6 +330,334 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSynapseAnalyticsActivitypoolLog')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/datalake40005007')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datalake4005007",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "PT1H.json",
+						"fileSystem": "temporary"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"count": {
+							"type": "integer"
+						},
+						"total": {
+							"type": "integer"
+						},
+						"minimum": {
+							"type": "integer"
+						},
+						"maximum": {
+							"type": "integer"
+						},
+						"resourceId": {
+							"type": "string"
+						},
+						"time": {
+							"type": "string"
+						},
+						"metricName": {
+							"type": "string"
+						},
+						"timeGrain": {
+							"type": "string"
+						},
+						"average": {
+							"type": "integer"
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datalake4005007')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/nsgdatalake40005007')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "nsgdataflow40005007",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "PT1H (1).json",
+						"fileSystem": "temporary"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"records": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"time": {
+										"type": "string"
+									},
+									"systemId": {
+										"type": "string"
+									},
+									"macAddress": {
+										"type": "string"
+									},
+									"category": {
+										"type": "string"
+									},
+									"resourceId": {
+										"type": "string"
+									},
+									"operationName": {
+										"type": "string"
+									},
+									"properties": {
+										"type": "object",
+										"properties": {
+											"Version": {
+												"type": "integer"
+											},
+											"flows": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"rule": {
+															"type": "string"
+														},
+														"flows": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"mac": {
+																		"type": "string"
+																	},
+																	"flowTuples": {
+																		"type": "array",
+																		"items": {
+																			"type": "string"
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/nsgdataflow40005007')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/nsgdatalake40005007Json')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "nsgdataflow_40005007",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "PT1H (1).json",
+						"fileSystem": "temporary"
+					}
+				},
+				"schema": {
+					"type": "object",
+					"properties": {
+						"records": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"time": {
+										"type": "string"
+									},
+									"systemId": {
+										"type": "string"
+									},
+									"macAddress": {
+										"type": "string"
+									},
+									"category": {
+										"type": "string"
+									},
+									"resourceId": {
+										"type": "string"
+									},
+									"operationName": {
+										"type": "string"
+									},
+									"properties": {
+										"type": "object",
+										"properties": {
+											"Version": {
+												"type": "integer"
+											},
+											"flows": {
+												"type": "array",
+												"items": {
+													"type": "object",
+													"properties": {
+														"rule": {
+															"type": "string"
+														},
+														"flows": {
+															"type": "array",
+															"items": {
+																"type": "object",
+																"properties": {
+																	"mac": {
+																		"type": "string"
+																	},
+																	"flowTuples": {
+																		"type": "array",
+																		"items": {
+																			"type": "string"
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/nsgdataflow_40005007')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/synapseflowtuples')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "synapseflowtuples",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlDWTable",
+				"schema": [
+					{
+						"name": "Recordedtime",
+						"type": "datetimeoffset",
+						"scale": 7
+					},
+					{
+						"name": "Rulename",
+						"type": "varchar"
+					},
+					{
+						"name": "SourceIPAddress",
+						"type": "varchar"
+					},
+					{
+						"name": "DestinationIPAdress",
+						"type": "varchar"
+					},
+					{
+						"name": "SourcePort",
+						"type": "varchar"
+					},
+					{
+						"name": "Decision",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "FlowTuples"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/synapseflowtuples')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/nsgdataflowtemporary')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datalake4005007",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "insights-logs-networksecuritygroupflowevent"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datalake4005007')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/temporrarynsgfolder')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datalake4005007",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "temporary"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datalake4005007')]"
 			]
 		},
 		{
@@ -419,6 +864,227 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/Activitylogcsv')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSynapseAnalyticsActivityPoolLog')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/01_NSG_dataflow1')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "nsgdatalake40005007Json",
+								"type": "DatasetReference"
+							},
+							"name": "sourceNSGFlow"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "synapseflowtuples",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "flattenlogs"
+						},
+						{
+							"name": "derivedColumnNSGFlow"
+						},
+						{
+							"name": "selecttablecolumns"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          records as (category as string, macAddress as string, operationName as string, properties as (Version as short, flows as (flows as (flowTuples as string[], mac as string)[], rule as string)[]), resourceId as string, systemId as string, time as string)[]",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     documentForm: 'documentPerLine') ~> sourceNSGFlow",
+						"sourceNSGFlow foldDown(unrollMultiple(records,records.properties.flows.flows.flowTuples),",
+						"     mapColumn(",
+						"          records = records,",
+						"          flowTuples = records.properties.flows.flows.flowTuples",
+						"     ),",
+						"     skipDuplicateMapInputs: false,",
+						"     skipDuplicateMapOutputs: false) ~> flattenlogs",
+						"flattenlogs derive(Recordedtime = records.time,",
+						"          Rulename = records.properties.flows.rule,",
+						"          SourceIPAddress = split(flowTuples, \",\")[2],",
+						"          DestinationIPAdress = split(flowTuples, \",\")[3],",
+						"          SourcePort = split(flowTuples, \",\")[5],",
+						"          Decision = split(flowTuples, \",\")[8]) ~> derivedColumnNSGFlow",
+						"derivedColumnNSGFlow select(mapColumn(",
+						"          Recordedtime,",
+						"          Rulename,",
+						"          SourceIPAddress,",
+						"          DestinationIPAdress,",
+						"          SourcePort,",
+						"          Decision",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> selecttablecolumns",
+						"selecttablecolumns sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     input(",
+						"          Recordedtime as string,",
+						"          Rulename as string,",
+						"          SourceIPAddress as string,",
+						"          DestinationIPAdress as string,",
+						"          SourcePort as string,",
+						"          Decision as string",
+						"     ),",
+						"     deletable:false,",
+						"     insertable:true,",
+						"     updateable:false,",
+						"     upsertable:false,",
+						"     format: 'table',",
+						"     staged: true,",
+						"     allowCopyCommand: true,",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true,",
+						"     errorHandlingOption: 'stopOnFirstError',",
+						"     mapColumn(",
+						"          Recordedtime,",
+						"          Rulename,",
+						"          SourceIPAddress,",
+						"          DestinationIPAdress,",
+						"          SourcePort,",
+						"          Decision",
+						"     )) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/nsgdatalake40005007Json')]",
+				"[concat(variables('factoryId'), '/datasets/synapseflowtuples')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "*",
+									"wildcardFileName": "*.json",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "MergeFiles"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "nsgdataflowtemporary",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "temporrarynsgfolder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Copy data1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "01_NSG_dataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"sourceNSGFlow": {},
+									"sink1": {}
+								}
+							},
+							"staging": {
+								"linkedService": {
+									"referenceName": "Stagingfoldernsg",
+									"type": "LinkedServiceReference"
+								},
+								"folderPath": "staging"
+							},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "None",
+							"cacheSinks": {
+								"firstRowOnly": true
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/nsgdataflowtemporary')]",
+				"[concat(variables('factoryId'), '/datasets/temporrarynsgfolder')]",
+				"[concat(variables('factoryId'), '/dataflows/01_NSG_dataflow1')]",
+				"[concat(variables('factoryId'), '/linkedServices/Stagingfoldernsg')]"
 			]
 		}
 	]

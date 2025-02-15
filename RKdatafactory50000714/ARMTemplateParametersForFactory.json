@@ -11,6 +11,21 @@
 		"AzureSynapseAnalyticsActivitypoolLog_password": {
 			"value": ""
 		},
+		"datalake4005007_accountKey": {
+			"value": ""
+		},
+		"nsgdataflow40005007_accountKey": {
+			"value": ""
+		},
+		"nsgdataflow_40005007_accountKey": {
+			"value": ""
+		},
+		"synapseflowtuples_connectionString": {
+			"value": ""
+		},
+		"Stagingfoldernsg_accountKey": {
+			"value": ""
+		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"value": "https://datalake40005007.dfs.core.windows.net/"
 		},
@@ -22,6 +37,18 @@
 		},
 		"AzureSynapseAnalyticsActivitypoolLog_properties_typeProperties_userName": {
 			"value": "sqladminuser"
+		},
+		"datalake4005007_properties_typeProperties_url": {
+			"value": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"nsgdataflow40005007_properties_typeProperties_url": {
+			"value": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"nsgdataflow_40005007_properties_typeProperties_url": {
+			"value": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"Stagingfoldernsg_properties_typeProperties_url": {
+			"value": "https://datalake40005007.dfs.core.windows.net/"
 		}
 	}
 }

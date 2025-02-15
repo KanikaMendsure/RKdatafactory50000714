@@ -15,6 +15,26 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AzureSynapseAnalyticsActivitypoolLog'"
 		},
+		"datalake4005007_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'datalake4005007'"
+		},
+		"nsgdataflow40005007_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'nsgdataflow40005007'"
+		},
+		"nsgdataflow_40005007_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'nsgdataflow_40005007'"
+		},
+		"synapseflowtuples_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'synapseflowtuples'"
+		},
+		"Stagingfoldernsg_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'Stagingfoldernsg'"
+		},
 		"AzureDataLakeStorage_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
@@ -30,6 +50,22 @@
 		"AzureSynapseAnalyticsActivitypoolLog_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "sqladminuser"
+		},
+		"datalake4005007_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"nsgdataflow40005007_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"nsgdataflow_40005007_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
+		},
+		"Stagingfoldernsg_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://datalake40005007.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -64,6 +100,21 @@
 					"AzureSynapseAnalyticsActivitypoolLog_password": {
 						"value": "[parameters('AzureSynapseAnalyticsActivitypoolLog_password')]"
 					},
+					"datalake4005007_accountKey": {
+						"value": "[parameters('datalake4005007_accountKey')]"
+					},
+					"nsgdataflow40005007_accountKey": {
+						"value": "[parameters('nsgdataflow40005007_accountKey')]"
+					},
+					"nsgdataflow_40005007_accountKey": {
+						"value": "[parameters('nsgdataflow_40005007_accountKey')]"
+					},
+					"synapseflowtuples_connectionString": {
+						"value": "[parameters('synapseflowtuples_connectionString')]"
+					},
+					"Stagingfoldernsg_accountKey": {
+						"value": "[parameters('Stagingfoldernsg_accountKey')]"
+					},
 					"AzureDataLakeStorage_properties_typeProperties_url": {
 						"value": "[parameters('AzureDataLakeStorage_properties_typeProperties_url')]"
 					},
@@ -75,6 +126,18 @@
 					},
 					"AzureSynapseAnalyticsActivitypoolLog_properties_typeProperties_userName": {
 						"value": "[parameters('AzureSynapseAnalyticsActivitypoolLog_properties_typeProperties_userName')]"
+					},
+					"datalake4005007_properties_typeProperties_url": {
+						"value": "[parameters('datalake4005007_properties_typeProperties_url')]"
+					},
+					"nsgdataflow40005007_properties_typeProperties_url": {
+						"value": "[parameters('nsgdataflow40005007_properties_typeProperties_url')]"
+					},
+					"nsgdataflow_40005007_properties_typeProperties_url": {
+						"value": "[parameters('nsgdataflow_40005007_properties_typeProperties_url')]"
+					},
+					"Stagingfoldernsg_properties_typeProperties_url": {
+						"value": "[parameters('Stagingfoldernsg_properties_typeProperties_url')]"
 					}
 				}
 			},
