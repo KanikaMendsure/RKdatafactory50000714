@@ -770,7 +770,6 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobFSLocation",
-						"fileName": "PT1H (1).json",
 						"fileSystem": "temporary"
 					}
 				},
