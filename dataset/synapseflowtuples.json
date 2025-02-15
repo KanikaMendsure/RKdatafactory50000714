@@ -1,0 +1,42 @@
+{
+	"name": "synapseflowtuples",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "synapseflowtuples",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Recordedtime",
+				"type": "datetimeoffset",
+				"scale": 7
+			},
+			{
+				"name": "Rulename",
+				"type": "varchar"
+			},
+			{
+				"name": "SourceIPAddress",
+				"type": "varchar"
+			},
+			{
+				"name": "DestinationIPAdress",
+				"type": "varchar"
+			},
+			{
+				"name": "SourcePort",
+				"type": "varchar"
+			},
+			{
+				"name": "Decision",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "FlowTuples"
+		}
+	}
+}

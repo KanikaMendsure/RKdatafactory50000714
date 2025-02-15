@@ -12,13 +12,24 @@
 					"name": "sourceNSGFlow"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "synapseflowtuples",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "flattenlogs"
 				},
 				{
 					"name": "derivedColumnNSGFlow"
+				},
+				{
+					"name": "selecttablecolumns"
 				}
 			],
 			"scriptLines": [
@@ -31,12 +42,55 @@
 				"     documentForm: 'arrayOfDocuments') ~> sourceNSGFlow",
 				"sourceNSGFlow foldDown(unrollMultiple(records,records.properties.flows.flows.flowTuples),",
 				"     mapColumn(",
-				"          records = records.properties.flows.flows.flowTuples,",
+				"          records = records,",
 				"          flowTuples = records.properties.flows.flows.flowTuples",
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> flattenlogs",
-				"flattenlogs derive(Recordedtime = ERROR_FUNCTION('')) ~> derivedColumnNSGFlow"
+				"flattenlogs derive(Recordedtime = records.time,",
+				"          Rulename = records.properties.flows.rule,",
+				"          SourceIPAddress = split(flowTuples, \",\")[2],",
+				"          DestinationIPAdress = split(flowTuples, \",\")[3],",
+				"          SourcePort = split(flowTuples, \",\")[5],",
+				"          Decision = split(flowTuples, \",\")[8]) ~> derivedColumnNSGFlow",
+				"derivedColumnNSGFlow select(mapColumn(",
+				"          Recordedtime,",
+				"          Rulename,",
+				"          SourceIPAddress,",
+				"          DestinationIPAdress,",
+				"          SourcePort,",
+				"          Decision",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> selecttablecolumns",
+				"selecttablecolumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Recordedtime as string,",
+				"          Rulename as string,",
+				"          SourceIPAddress as string,",
+				"          DestinationIPAdress as string,",
+				"          SourcePort as string,",
+				"          Decision as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Recordedtime,",
+				"          Rulename,",
+				"          SourceIPAddress,",
+				"          DestinationIPAdress,",
+				"          SourcePort,",
+				"          Decision",
+				"     )) ~> sink1"
 			]
 		}
 	}
