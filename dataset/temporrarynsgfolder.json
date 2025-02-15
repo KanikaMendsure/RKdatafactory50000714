@@ -1,0 +1,18 @@
+{
+	"name": "temporrarynsgfolder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datalake4005007",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "temporary"
+			}
+		},
+		"schema": {}
+	}
+}
