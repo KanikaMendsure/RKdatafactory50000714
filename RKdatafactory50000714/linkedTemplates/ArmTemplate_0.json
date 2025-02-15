@@ -661,6 +661,28 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/nsgtemporaryfile')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datalake4005007",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "temporary"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datalake4005007')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/CopyDatapipeline')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -1073,6 +1095,39 @@
 								"firstRowOnly": true
 							}
 						}
+					},
+					{
+						"name": "Delete1",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "Data flow1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "nsgtemporaryfile",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
 					}
 				],
 				"policy": {
@@ -1084,7 +1139,8 @@
 				"[concat(variables('factoryId'), '/datasets/nsgdataflowtemporary')]",
 				"[concat(variables('factoryId'), '/datasets/temporrarynsgfolder')]",
 				"[concat(variables('factoryId'), '/dataflows/01_NSG_dataflow1')]",
-				"[concat(variables('factoryId'), '/linkedServices/Stagingfoldernsg')]"
+				"[concat(variables('factoryId'), '/linkedServices/Stagingfoldernsg')]",
+				"[concat(variables('factoryId'), '/datasets/nsgtemporaryfile')]"
 			]
 		}
 	]
